@@ -1,2 +1,3 @@
 # ThirdPersonShooter
- It's a Unreal Engine Project to learn and practise
+Add the ‘AssetPack’ folder into the ‘Content’ folder, then run the project.
+
