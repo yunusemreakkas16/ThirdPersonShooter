@@ -29,7 +29,12 @@ public:
 private:
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
+	void LookUpRate(float AxisValue);
+	void LookRightRate(float AxisValue);
 
 	UPROPERTY(EditAnywhere)
 	float MoveSpeed = 2.f;
+
+	UPROPERTY(EditAnywhere)
+	float RotationRate = 75;
 };
