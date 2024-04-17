@@ -43,12 +43,12 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 void AShooterCharacter::MoveForward(float AxisValue)
 {
-	AddMovementInput(GetActorForwardVector() * AxisValue * MoveSpeed);
+	AddMovementInput(GetActorForwardVector() * AxisValue);
 }
 
 void AShooterCharacter::MoveRight(float AxisValue)
 {
-	AddMovementInput(GetActorRightVector() * AxisValue * MoveSpeed);
+	AddMovementInput(GetActorRightVector() * AxisValue);
 }
 
 void AShooterCharacter::LookUpRate(float AxisValue)
