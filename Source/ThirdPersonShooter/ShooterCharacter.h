@@ -16,6 +16,7 @@ class THIRDPERSONSHOOTER_API AShooterCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AShooterCharacter();
+	void Shoot();
 
 protected:
 	// Called when the game starts or when spawned
