@@ -16,6 +16,8 @@ AShooterCharacter::AShooterCharacter()
 void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	Health = MaxHealth;
 	
 Gun = GetWorld()->SpawnActor<AGun>(GunClass);
 if (Gun)
@@ -23,10 +25,12 @@ if (Gun)
     GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
     Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
     Gun->SetOwner(this);
+
 }
 else
 {
     UE_LOG(LogTemp, Warning, TEXT("Gun object could not be created!"));
+
 }
 
 }
@@ -53,6 +57,15 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis(TEXT("LookRightRate"), this, &AShooterCharacter::LookRightRate);
 
 
+}
+
+float AShooterCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	DamageToApply = FMath::Min(Health, DamageToApply);
+	Health-= DamageToApply;
+	UE_LOG(LogTemp,Warning, TEXT("Health left = %f"), Health);
+	return DamageToApply;
 }
 
 void AShooterCharacter::MoveForward(float AxisValue)
