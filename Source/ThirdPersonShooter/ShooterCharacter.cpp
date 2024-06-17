@@ -19,20 +19,24 @@ void AShooterCharacter::BeginPlay()
 
 	Health = MaxHealth;
 	
-Gun = GetWorld()->SpawnActor<AGun>(GunClass);
-if (Gun)
-{
-    GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
-    Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
-    Gun->SetOwner(this);
+	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
+	if (Gun)
+	{
+    	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
+    	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+    	Gun->SetOwner(this);
 
+	}
+	else
+	{
+    	UE_LOG(LogTemp, Warning, TEXT("Gun object could not be created!"));
+
+	}
 }
-else
+
+bool AShooterCharacter::IsDead()const
 {
-    UE_LOG(LogTemp, Warning, TEXT("Gun object could not be created!"));
-
-}
-
+	return Health <=0;
 }
 
 // Called every frame
