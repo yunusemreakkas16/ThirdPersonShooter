@@ -11,29 +11,28 @@ void AShooterAiController::BeginPlay()
 
     if(AIBehavior != nullptr){RunBehaviorTree(AIBehavior);}
 
-    APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-
-
-    GetBlackboardComponent()->SetValueAsVector(TEXT("PlayerLocation"), PlayerPawn->GetActorLocation());
     GetBlackboardComponent()->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
+
 }
 
 void AShooterAiController::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 
-    /* APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+        APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+        FVector PlayerLocation = PlayerPawn->GetActorLocation();
     
     if(LineOfSightTo(PlayerPawn))
     {
-        SetFocus(PlayerPawn);
-        MoveToActor(PlayerPawn, AcceptanceRadius);
+
+        GetBlackboardComponent()->SetValueAsVector(TEXT("PlayerLocation"), PlayerLocation);
+        GetBlackboardComponent()->SetValueAsVector(TEXT("LastKnownPlayerLocation"), PlayerLocation);   
 
     }
     else
     {
-        ClearFocus(EAIFocusPriority::Gameplay);
-        StopMovement();
-    } */
+        GetBlackboardComponent()->ClearValue(TEXT("PlayerLocation"));
+        UE_LOG(LogTemp, Warning, TEXT("I've lost you"));
+    } 
 
 }
