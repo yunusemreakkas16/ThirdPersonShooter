@@ -14,10 +14,6 @@ class THIRDPERSONSHOOTER_API AShooterAiController : public AAIController
 {
 	GENERATED_BODY()
 
-public:
-
-	virtual void Tick(float DeltaSeconds) override;
-
 protected:
 
 	virtual void BeginPlay() override;
