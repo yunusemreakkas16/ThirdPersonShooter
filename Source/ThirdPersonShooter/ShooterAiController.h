@@ -14,8 +14,10 @@ class THIRDPERSONSHOOTER_API AShooterAiController : public AAIController
 {
 	GENERATED_BODY()
 
+public:
+	bool IsDead()const;
+	
 protected:
-
 	virtual void BeginPlay() override;
 
 private:
