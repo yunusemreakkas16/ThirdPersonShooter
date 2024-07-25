@@ -5,9 +5,25 @@
 #include "TimerManager.h"
 #include "Blueprint/UserWidget.h"
 
+void AShooterPlayerController::BeginPlay()
+{
+    Super::BeginPlay();
+
+    CrosshairScreen = CreateWidget(this, Crosshair);
+    if(CrosshairScreen)
+    {
+        CrosshairScreen->AddToViewport();
+    }
+}
+
 void AShooterPlayerController::GameHasEnded(class AActor* EndGameFocus, bool bIsWinner)
 {
     Super::GameHasEnded(EndGameFocus, bIsWinner);
+
+    if(CrosshairScreen)
+    {
+        CrosshairScreen->RemoveFromParent();
+    }
 
     if(bIsWinner)
     {
